@@ -124,6 +124,7 @@ DELETE
 http://localhost:8080/api/expenses/{id}
 
 🗄 Expense Model (Entity)
+
 @Entity
 public class Expense {
 
