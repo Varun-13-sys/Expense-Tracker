@@ -1,26 +1,26 @@
-# Use Java 17 base image (works best with Spring Boot)
-FROM eclipse-temurin:21-jdk-alpine
+# Use Java 21 base image (compatible with your project)
+FROM eclipse-temurin:21-jdk
 
-# Create work directory
+# Create working directory
 WORKDIR /app
 
-# Copy Maven wrapper and related files
+# Copy Maven wrapper and build files
 COPY .mvn/ .mvn
 COPY mvnw .
 COPY pom.xml .
 
-# Download dependencies
+# Download dependencies (offline download)
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B
 
-# Copy source code
+# Copy project source code
 COPY src ./src
 
-# Build the application
+# Build application (skip tests)
 RUN ./mvnw clean package -DskipTests
 
-# Expose (Render will override)
+# Expose port (Render sets PORT env internally)
 EXPOSE 8080
 
-# Run the JAR file (your exact JAR name)
-CMD ["java", "-jar", "target/expense-tracker-0.0.1-SNAPSHOT.jar"]
+# Auto-detect and run the generated JAR file
+CMD ["sh", "-c", "java -jar target/*.jar"]
