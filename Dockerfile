@@ -1,5 +1,5 @@
 # Use Java 17 base image (works best with Spring Boot)
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jdk-alpine
 
 # Create work directory
 WORKDIR /app
