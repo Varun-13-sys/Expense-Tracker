@@ -8,7 +8,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
-@CrossOrigin //to allow React frontend calls
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+//        "https://expense-frontend-yourdomain"  //if frontend is deployed later
+})
 public class ExpenseController {
     private final ExpenseService service;
 
