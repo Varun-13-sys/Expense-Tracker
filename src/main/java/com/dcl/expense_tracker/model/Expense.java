@@ -18,6 +18,16 @@ public class Expense {
 
     private String date;
 
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    private String deviceId;
+
     public long getId() {
         return id;
     }

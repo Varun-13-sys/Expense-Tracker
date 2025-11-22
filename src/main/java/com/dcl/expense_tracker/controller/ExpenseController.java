@@ -10,37 +10,52 @@ import java.util.List;
 @RequestMapping("/api/expenses")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-//        "https://expense-frontend-yourdomain"  //if frontend is deployed later
+         "https://varun-13-sys.github.io/Expense-tracker-frontend/"
 })
 public class ExpenseController {
+
     private final ExpenseService service;
 
-    public ExpenseController(ExpenseService service){
+    public ExpenseController(ExpenseService service) {
         this.service = service;
     }
 
+    // ✅ Get all expenses for a specific device
     @GetMapping
-    public List<Expense> getAll(){
-        return service.getAll();
+    public List<Expense> getByDevice(
+            @RequestHeader("X-Device-ID") String deviceId) {
+
+        return service.getByDeviceId(deviceId);
     }
 
+    // ✅ Get single expense by id
     @GetMapping("/{id}")
     public Expense getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
+    // ✅ Add new expense with deviceId
     @PostMapping
-    public Expense add(@RequestBody Expense expense){
-        return service.add(expense);
+    public Expense add(
+            @RequestHeader("X-Device-ID") String deviceId,
+            @RequestBody Expense expense) {
+
+        return service.add(expense, deviceId);
     }
 
+    // ✅ Update expense (still tied to same device)
     @PutMapping("/{id}")
-    public Expense update(@PathVariable Long id, @RequestBody Expense expense){
-        return service.update(id, expense);
+    public Expense update(
+            @PathVariable Long id,
+            @RequestHeader("X-Device-ID") String deviceId,
+            @RequestBody Expense expense) {
+
+        return service.update(id, expense, deviceId);
     }
 
+    // ✅ Delete
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 }
