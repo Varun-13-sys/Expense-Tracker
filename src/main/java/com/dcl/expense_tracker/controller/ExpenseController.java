@@ -10,8 +10,9 @@ import java.util.List;
 @RequestMapping("/api/expenses")
 @CrossOrigin(origins = {
         "http://localhost:5173",
-//         "https://varun-13-sys.github.io/Expense-tracker-frontend/"
+        "https://varun-13-sys.github.io"
 })
+
 public class ExpenseController {
 
     private final ExpenseService service;

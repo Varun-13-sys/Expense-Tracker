@@ -16,6 +16,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5173",
+                                "https://varun-13-sys.github.io",
                                 "https://varun-13-sys.github.io/Expense-tracker-frontend/" // your future GitHub pages URL
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
